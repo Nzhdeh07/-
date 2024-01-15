@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'main/css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="login">
+        <div class="form-box">
+            <div class="form-value">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="inputbox">
+                        <input type="text" id="id_title" name="title" required>
+                        <label>Title</label>
+                    </div>
+                    <div class="inputbox file-input">
+                        <label for="id_image" id="fileLabelAudio">Choose File</label>
+                        <input type="file" id="id_audio_file" name="audio_file" accept=".mp3,.wav" required
+                               onchange="updateFileLabel(this, 'fileLabelAudio')">
+                    </div>
+
+                    <div class="inputbox file-input">
+                        <label for="id_image" id="fileLabelImage">Choose File</label>
+                        <input type="file" id="id_image" name="image" accept=".jpg,.png" required
+                               onchange="updateFileLabel(this, 'fileLabelImage')">
+                    </div>
+
+                    <div class="inputbox file-input">
+                        <label for="id_image" id="fileLabelPlaylist">Choose Playlist</label>
+                              <select id="id_playlist" name="playlist" onchange="updateFileLabel(this, 'fileLabelPlaylist')">
+                        {% for playlist in playlists %}
+                            <option value="{{ playlist.id }}">{{ playlist.title }}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+
+                    <input type="submit" value="Create">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function updateFileLabel(input, labelId) {
+            const label = document.getElementById(labelId);
+
+            if (input.files.length > 0) {
+                label.textContent = input.files[0].name;
+            } else {
+                label.textContent = 'Choose File';
+            }
+        }
+    </script>
+{% endblock %}

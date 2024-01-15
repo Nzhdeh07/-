@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+ <section class="login">
+        <div class="form-box">
+            <div class="form-value">
+                <h2>Registration</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="inputbox">
+                        {{ form.username }}
+                        <label>Login</label>
+                    </div>
+                    <div class="inputbox">
+                        {{ form.password }}
+                        <label>Password</label>
+                    </div>
+                    <input type="submit" value="Register">
+                </form>
+                <div class="register">
+                    <p>Have a account <a href="{% url 'login' %}"> Login</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'main/css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="login">
+        <div class="form-box">
+            <div class="form-value">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="inputbox file-input">
+                        <select id="is_playlist" name="playlist">
+                            {% for playlist in playlists %}
+                                <option value="{{ playlist.id }}">{{ playlist.title }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Select Playlist</label>
+                    </div>
+                <input type="submit" value="Delete Playlist">
+                                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

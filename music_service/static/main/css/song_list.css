@@ -1,0 +1,100 @@
+.mediaCards {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 15px;
+}
+
+.mediaCards .mediaCard {
+    border-radius: 20px;
+    margin: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+
+.mediaCards .mediaCardImage {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+}
+
+.mediaCards .mediaCardFooter {
+    display: block;
+    background: #282828;
+    padding: 15px;
+    color: white;
+    border-radius: 0 0 18px 18px;
+}
+
+.playIcon {
+    display: none; /* Скрыть изначально */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+/* Показать значок воспроизведения при наведении на песню */
+.mediaCard:hover .playIcon {
+    display: block;
+}
+
+/* Увеличить прозрачность значка при наведении */
+.mediaCard:hover .playIcon {
+    opacity: 1;
+}
+
+
+
+
+.player-controls {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+#progressContainer {
+    width: 300px;
+    height: 7px;
+    background-color: #5e5e5e;
+    margin-right: 10px;
+    border-radius: 4px; /* Задаем скругления углов */
+    border: 1px solid #ccc; /* Задаем контур */
+}
+
+#progressBar {
+    height: 100%;
+    background-color: tan;
+    width: 0;
+}
+
+#timeContainer {
+    font-size: 14px;
+    font-weight: bold;
+    color: tan;
+}
+
+button {
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 2px;
+    background-color: tan;
+}
