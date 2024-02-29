@@ -54,12 +54,12 @@ class Playlists_ListView(ListView):
     template_name = 'main/playlists.html'
     context_object_name = 'playlists'
 
-    def dispatch(self, request, *args, **kwargs):  # определяет, какой метод должен быть вызван для обработки запроса
+    def dispatch(self, request, *args, **kwargs): 
         if not request.user.is_authenticated:
             return redirect('register_client')
         return super().dispatch(request, *args, **kwargs)
 
-    def get_queryset(self):   # возвращает запрос к базе данных для получения объектов модели
+    def get_queryset(self):   
         playlists_ = Playlist.objects.filter(user_id=self.request.user.id)
         return playlists_
 
@@ -76,7 +76,6 @@ class Playlist_CreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # Устанавливаем текущего пользователя как создателя плейлиста
         form.instance.user = self.request.user
         return super().form_valid(form)
 
@@ -105,7 +104,7 @@ class DeletePlaylistView(FormView):
         kwargs['user'] = self.request.user
         return kwargs
 
-    def get_context_data(self, *, object_list=None, **kwargs):  # получения контекста, который будет передан в шаблон
+    def get_context_data(self, *, object_list=None, **kwargs):  
         context = super().get_context_data(**kwargs)
         playlists = Playlist.objects.filter(user=self.request.user)
         context['playlists'] = playlists
@@ -156,7 +155,7 @@ class Song_CreateView(CreateView):
         playlist.songs.add(song)
         return redirect(self.success_url)
 
-    def get_context_data(self, *, object_list=None, **kwargs):  # получения контекста, который будет передан в шаблон
+    def get_context_data(self, *, object_list=None, **kwargs): 
         context = super().get_context_data(**kwargs)
         playlists = Playlist.objects.filter(user=self.request.user)
         context['playlists'] = playlists
@@ -187,7 +186,7 @@ class DeleteSongsView(FormView):
         kwargs['user'] = self.request.user
         return kwargs
 
-    def get_context_data(self, *, object_list=None, **kwargs):  # получения контекста, который будет передан в шаблон
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         songs = Song.objects.filter(user=self.request.user)
         context['songs'] = songs
@@ -198,19 +197,19 @@ class Song_ListView(ListView):
     template_name = 'main/song_list.html'
     context_object_name = 'songs'
 
-    def dispatch(self, request, *args, **kwargs):  # определяет, какой метод должен быть вызван для обработки запроса
+    def dispatch(self, request, *args, **kwargs):  
         if not request.user.is_authenticated:
             return redirect('register_client')
         return super().dispatch(request, *args, **kwargs)
 
-    def get_queryset(self):  # возвращает запрос к базе данных для получения объектов модели
+    def get_queryset(self): 
         songs = Song.objects.filter(user_id=self.request.user.id)
         songs_with_index = {}
         for i, song in enumerate(songs):
             songs_with_index[i] = song
         return songs_with_index
 
-    def get_context_data(self, *, object_list=None, **kwargs):  # получения контекста, который будет передан в шаблон
+    def get_context_data(self, *, object_list=None, **kwargs): 
         context = super().get_context_data(**kwargs)
         songs = Song.objects.filter(user_id=self.request.user.id)
         playlist_json = serializers.serialize('json', songs, fields=('title', 'audio_file'))
@@ -222,12 +221,12 @@ class Key_ListView(ListView):
     template_name = 'main/key.html'
     context_object_name = 'songs'
 
-    def dispatch(self, request, *args, **kwargs):  # определяет, какой метод должен быть вызван для обработки запроса
+    def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect('register_client')
         return super().dispatch(request, *args, **kwargs)
 
-    def get_queryset(self):  # возвращает запрос к базе данных для получения объектов модели
+    def get_queryset(self): 
         songs = Song.objects.filter(user_id=self.request.user.id)
         songs_with_index = {}
         for i, song in enumerate(songs):
@@ -252,12 +251,12 @@ class BPM_ListView(ListView):
     template_name = 'main/bpm.html'
     context_object_name = 'songs'
 
-    def dispatch(self, request, *args, **kwargs):  # определяет, какой метод должен быть вызван для обработки запроса
+    def dispatch(self, request, *args, **kwargs):  
         if not request.user.is_authenticated:
             return redirect('register_client')
         return super().dispatch(request, *args, **kwargs)
 
-    def get_queryset(self):  # возвращает запрос к базе данных для получения объектов модели
+    def get_queryset(self):  
         songs = Song.objects.filter(user_id=self.request.user.id)
         songs_with_index = {}
         for i, song in enumerate(songs):
